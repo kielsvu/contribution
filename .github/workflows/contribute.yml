@@ -2,7 +2,7 @@ name: Contribution Automation
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # every 5 minutes (GitHub's minimum)
+    - cron: '0 */1 * * *'  # every hour (more reliable)
   workflow_dispatch:
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
 
       - name: Make commits
         run: |
-          for i in $(seq 1 10); do
+          for i in $(seq 1 50); do
             echo "$(date +%s)-$i" >> activity.log
             git add .
             git commit -m "chore: activity update $i"
