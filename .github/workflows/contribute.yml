@@ -2,8 +2,7 @@ name: Contribution Automation
 
 on:
   schedule:
-    - cron: '0 */1 * * *'  # every hour (more reliable)
-  workflow_dispatch:
+    - cron: '20 16 * * *'  # 12:20 AM Philippines Time (UTC+8)
 
 permissions:
   contents: write
@@ -20,9 +19,9 @@ jobs:
           git config user.name "kielsvu"
           git config user.email "jhoneragustin@gmail.com"
 
-      - name: Make commits
+      - name: Make 100 commits
         run: |
-          for i in $(seq 1 50); do
+          for i in $(seq 1 100); do
             echo "$(date +%s)-$i" >> activity.log
             git add .
             git commit -m "chore: activity update $i"
