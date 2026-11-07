@@ -1,8 +1,6 @@
-name: Contribute Automation
+name: Contribution Automation
 
 on:
-  schedule:
-    - cron: '20 16 * * *'
   workflow_dispatch:
 
 permissions:
@@ -13,8 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Configure Git
         run: |
@@ -25,9 +22,9 @@ jobs:
         run: |
           for i in $(seq 1 100); do
             echo "$(date +%s)-$i" >> activity.log
-            git add activity.log
+            git add .
             git commit -m "chore: activity update $i"
           done
 
-      - name: Push changes
+      - name: Push
         run: git push
