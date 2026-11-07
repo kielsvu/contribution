@@ -1,31 +1,32 @@
 name: Contribute Automation
 
 on:
-  schedule:
-    - cron: '20 16 * * *'  # 12:20 AM Philippines Time (UTC+8)
+schedule:
+- cron: '20 16 * * *'
+workflow_dispatch:
 
 permissions:
-  contents: write
+contents: write
 
 jobs:
-  contribute:
-    runs-on: ubuntu-latest
+contribute:
+runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+steps:
+  - uses: actions/checkout@v4
 
-      - name: Configure Git
-        run: |
-          git config user.name "kielsvu"
-          git config user.email "jhoneragustin@gmail.com"
+  - name: Configure Git
+    run: |
+      git config user.name "kielsvu"
+      git config user.email "jhoneragustin@gmail.com"
 
-      - name: Make 100 commits
-        run: |
-          for i in $(seq 1 100); do
-            echo "$(date +%s)-$i" >> activity.log
-            git add .
-            git commit -m "chore: activity update $i"
-          done
+  - name: Make 100 commits
+    run: |
+      for i in $(seq 1 100); do
+        echo "$(date +%s)-$i" >> activity.log
+        git add activity.log
+        git commit -m "chore: activity update $i"
+      done
 
-      - name: Push
-        run: git push
+  - name: Push
+    run: git push
